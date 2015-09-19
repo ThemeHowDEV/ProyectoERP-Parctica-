@@ -15,5 +15,4 @@ function conectar($conectar)
             mysql_close();//para cerrar la base de datos
             }
 }
-//Ivan, tiene que ser un cambio mas grande
 ?>
