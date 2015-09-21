@@ -18,7 +18,7 @@ $consul=mysql_query($sql) or die (mysql_error()."<br>".$sql);
 while ($result=mysql_fetch_object($consul)) 
 {
 	?><a href="#" onclick="acceso('<?php echo $result->modulo; ?>','<?php echo $result->id; ?>')"><?php echo $result->modulo; ?></a><?php
-    echo "<br>";
+    echo "<br>Cambio";
     //echo $result->enlace."<br>";
 }
 ?>
