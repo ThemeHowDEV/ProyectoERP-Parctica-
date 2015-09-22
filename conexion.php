@@ -13,7 +13,7 @@ function conectar($conectar)
             {
             $link= mysql_connect('localhost','root','');
             mysql_close();//para cerrar la base de datos
-            }//prueba
+            }
 }
 
 ?>

@@ -1,0 +1,26 @@
+AddDefaultCharset utf-8
+RewriteRule ^(([^/]+/)*[^.]+)$ /$1.php [L]
+<IfModule mod_php5.c>
+    php_flag display_errors 1
+    php_value max_execution_time 60
+    php_value upload_max_filesize "2001M"
+    php_value post_max_size "2000M"
+    php_value max_input_time 3600
+    php_value allow_call_time_pass_reference "On"
+</IfModule>
+RewriteEngine On
+RewriteBase /
+#RewriteRule ^([a-zA-Z0-9\/\-\_\ áéíóúÁÉÍÓÚnN]+)\.(css|js)?$ /file_clear.php?file=/$1.$2 [QSA,L]
+RewriteRule ^([a-zA-Z0-9\/\-\_\ áéíóúÁÉÍÓÚnN]+)\.ini?$ /index.php [QSA,L]
+RewriteRule ^([a-zA-Z0-9\/\-\_\ áéíóúÁÉÍÓÚnN]+)\.(amf|json|xmlrpc)?$ /gateway.php?gateway=$2 [QSA,L]
+RewriteCond %{REQUEST_FILENAME} -s
+RewriteRule ^(.*) $1 [L]
+#RewriteCond %{REQUEST_URI} ^/html.*
+RewriteCond "%{DOCUMENT_ROOT}/html%{REQUEST_URI}" -s
+RewriteRule ^(.*) /html/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9\/\-\_\ áéíóúÁÉÍÓÚnN]+)?$ /index.php?url=/$1&type=folder [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-s
+#Modificacion solo para panorama
+RewriteRule ^([a-zA-Z0-9\/\-\_\ áéíóúÁÉÍÓÚnN]+)\.(php)?$ /301.php?url=/$1 [QSA,L]
+RewriteRule ^([a-zA-Z0-9\/\-\_\ áéíóúÁÉÍÓÚnN]+)\.(.*)?$ /index.php?url=/$1&type=$2 [QSA,L]

@@ -1,3 +1,27 @@
+<!--<body oncontextmenu="return false" onkeydown="return false"> Evitar el clic derecho-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+
+    <title>Usuarios y configuracion ::::::::::::::::::::</title>
+    <link rel="stylesheet" type="text/css" href="libs/tab/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="libs/tab/shCore.css">
+    <link rel="stylesheet" type="text/css" href="libs/tab/demo.css">
+    <style type="text/css" class="init">
+
+    </style>
+   
+   
+<script languaje="JavaScript" type="text/javascript">
+function Modules(id)
+{
+    var idT =id;
+    $("#Modulos").load('modulos/modulos.php', { id: idT})
+}
+</script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <?php 
 include 'conexion.php';
@@ -17,38 +41,12 @@ $consul=mysql_query($sql) or die (mysql_error()."<br>".$sql);
 
 while ($result=mysql_fetch_object($consul)) 
 {
-	?><a href="#" onclick="acceso('<?php echo $result->modulo; ?>','<?php echo $result->id; ?>')"><?php echo $result->modulo; ?></a><?php
-    echo "<br>Cambio";
-    //echo $result->enlace."<br>";
+
+	?><a onclick='Modules("<?php echo $result->id; ?>")' href="#"><?php echo $result->modulo;?></a>
+    <?php
+        echo "<br>";
 }
 ?>
-<div id="Redirect" name="Redirect">
-</div>
-<script type="text/javascript">
-function acceso(module,id) 
-{
-//Ramdom
-var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 255; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-	var dir=module;
-	var idS=id;
-	campo = '<form  metod ="POST" id="FORM" action="modulos/'+dir+'.php">'+
-	'<input type="hidden" size="20" id="10128" value="'+idS+'" name="'+text+'"/>'+
-	'<input type="hidden" size="20" id="10128" value="'+text+'" name="accesKey" />'+
-	'</form>';
-      $("#Redirect").append(campo);//Agregar inputs creados
-      document.getElementById('FORM').submit();
-};
-/*
-$(document).ready(function acceso() {
-  window.location ="usuarios.php?id=2";
-});*/
-</script>
-
 <?php 
  if($_SESSION['nivel']==0){
     ?>
@@ -57,7 +55,10 @@ $(document).ready(function acceso() {
     title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
     <img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
     <?php
- 	echo "Eres Super Admin";
+ 	//echo "Eres Super Admin";
+    echo '<div id="Modulos">
+        
+    </div>';
 }
 elseif($_SESSION['nivel']==1)
 {
@@ -68,6 +69,9 @@ elseif($_SESSION['nivel']==1)
     <img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
     <?php
 	echo "eres Admin";
+        echo '<div id="Modulos">
+        
+    </div>';
 }
 elseif($_SESSION['nivel']==2)
 {
@@ -78,6 +82,9 @@ elseif($_SESSION['nivel']==2)
     <img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
     <?php
 	echo "eres user";
+        echo '<div id="Modulos">
+        
+    </div>';
 } else
      {
              ?>
