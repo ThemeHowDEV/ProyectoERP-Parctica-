@@ -38,3 +38,6 @@ SELECT m.nombre modulo,m.html enlace,m.estado,p.id_user permiso FROM crr_modules
 WHERE  p.id_user=2
 AND p.id_modulo=m.id
 AND m.estado=1;
+
+--Email
+SELECT usuario,correo FROM crr_users WHERE usuario ='' OR correo ='';
