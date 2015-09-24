@@ -17,11 +17,20 @@
     background-color: #FFBABA;
     background-image: url('error.png');
 }
+.exito {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    background-image:url('exito.png');
+}
 	</style>
 	<script type="text/javascript" src="jquery-1.2.6.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             setTimeout(function(){ $(".error").fadeOut(800).fadeIn(800).fadeOut(500).fadeIn(500).fadeOut(300);}, 3000);  
+        });
+
+          $(document).ready(function(){
+            setTimeout(function(){ $(".mensajes").fadeOut(800).fadeIn(800).fadeOut(500).fadeIn(500).fadeOut(300);}, 3000);  
         });
 </script>
 <h1>Recuperar Contraseña</h1>
@@ -48,7 +57,7 @@ while ($file=mysql_fetch_object($cons)) {
 
 if($file->id>=1)
 {
-echo $file->correo;
+    ?><div class="exito mensajes">Se ha enviado un correo de recuperacion a <?php echo $file->correo; ?></div><?php
 }
 else{
 	echo '<div class="error">No se encontraron datos</div> '; }
