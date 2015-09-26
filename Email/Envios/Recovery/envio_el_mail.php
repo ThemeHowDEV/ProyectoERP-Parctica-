@@ -1,12 +1,11 @@
 <?php
 
 function envio(){
-    require './class.phpmailer.php';
-    require './index.php';
-    $e_mail=$_POST['email'];
-    $nombre=$_POST['nombre'];
-    $contenido=$_POST['texto'];
-    $empresa=$_POST['empre'];
+   
+    $e_mail='ivan.rodriguez1986@hotmail.com';
+    $nombre='Ivan';
+    $contenido='<a href="http://localhost/ProyectoERP-Parctica-/Email/RecoveryPass/recovery.php" >Link</a>';
+    $empresa='UTEG';
     
     $fecha=  date("d-m-y");
     $hora=  date("H: i: s");
@@ -19,6 +18,7 @@ function envio(){
     $mail->Username   = 'potara.cotosta@gmail.com';
     $mail->Password   = "hadess122486";
     $mail -> Body ="El cliente $nombre ha comentado: ".$contenido." Email: ".$e_mail." Tel: $empresa";
+    $mail->IsHTML(TRUE);
 
     
     //====== DE QUIEN ES ========
