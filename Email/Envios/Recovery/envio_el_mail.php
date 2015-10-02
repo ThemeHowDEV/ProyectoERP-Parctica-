@@ -1,10 +1,10 @@
 <?php
 
-function envio(){
+function envio($fecha,$id){
    
     $e_mail='ivan.rodriguez1986@hotmail.com';
     $nombre='Ivan';
-    $contenido='<a href="http://localhost/ProyectoERP-Parctica-/Email/RecoveryPass/recovery.php" >Link</a>';
+    $contenido='<a href="http://localhost/ProyectoERP-Parctica-/Email/RecoveryPass/recovery.php?Vm14YVUxUXhUWGxVYTJoVlYwaENWMWx0ZUhkalZsWnhVMjA1YWsxWGREVmFSVll3WVZaS2RHVkVRbGRpUmtZelZVWkZPVkJSUFQwPQ='.$fecha.'&VZaS2RHVkVRbGRpUmtZelZVWkZPVkJSUFQwPQ='.$id.'" >Link</a>';
     $empresa='UTEG';
     
     $fecha=  date("d-m-y");

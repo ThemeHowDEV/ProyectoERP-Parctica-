@@ -1,7 +1,7 @@
 <html>
 <?php require '../Envios/Recovery/envio_el_mail.php'; 
       require '../Envios/Recovery/class.phpmailer.php';
-      require '../Envios/Recovery/index.php';
+      date_default_timezone_set('America/Mexico_City');
 ?>
 <head><title>Recuperar contraseña</title></head>
 <body>
@@ -61,7 +61,9 @@ while ($file=mysql_fetch_object($cons)) {
 
 if($file->id>=1)
 {
-    envio();
+    $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s",(strtotime ("+5 minutes")))));//Sumar minutos
+    $id=base64_encode(base64_encode(base64_encode($file->id)));
+    envio($fecha,$id);
     ?><div class="exito mensajes">Se ha enviado un correo de recuperacion a <?php echo $file->correo; ?></div><?php
 }
 else{
@@ -69,19 +71,19 @@ else{
 
 }}
    else{ }
-    echo $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s")));
+    /*echo $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s",(strtotime ("+2 minutes")))));//Sumar minutos
 echo "<br>";
     echo base64_decode(base64_decode($fecha)); 
-echo "<br>";
+echo "<br>";*/
 
-
+/*
 $fecha_actual = $fecha;
 $fecha_entrada = $fecha;
 if($fecha_actual > $fecha_entrada){
         echo "La fecha entrada ya ha pasado";
 }else{
         echo "Aun falta algun tiempo";
-}
+}*/
 ?>
 </body>
 </html>
