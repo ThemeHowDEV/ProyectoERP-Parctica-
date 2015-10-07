@@ -39,6 +39,7 @@
 						<th>Correo</th>
 						<th>Rol</th>
 						<th>Contraseña</th>
+						<th><img title="Herramientas" width='20%' src="https://cdn4.iconfinder.com/data/icons/seo-and-data/500/globe-tools-settings-128.png"></th>
 						
 					</tr>
 				</thead>
@@ -49,6 +50,7 @@
 						<th>Correo</th>
 						<th>Rol</th>
 						<th>Contraseña</th>
+						<th>Herramientas</th>
 					</tr>
 				</tfoot>
 								<tbody>
@@ -59,6 +61,7 @@
 						<td>$file->correo</td>
 						<td>$file->nivel</td>
 						<td>**************</td>
+						<td>Editar, Eliminar, crear, bloquear</td>
 						
 					</tr>";
    	

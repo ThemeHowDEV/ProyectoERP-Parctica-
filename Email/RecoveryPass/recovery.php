@@ -1,3 +1,5 @@
+<head><title>Cambio de Contraseña</title></head>
+<script type="text/javascript" src="jsRelocate.js"></script>
 <?php 
 include '../../conexion.php';
 date_default_timezone_set('America/Mexico_City');
@@ -18,16 +20,19 @@ if($fechaActual > $fecha){
 	conectar(1);
 	$id=base64_decode(base64_decode(base64_decode($id)));
 
-	$sql="SELECT usuario FROM crr_users WHERE id = $id;";
+	$sql="SELECT usuario,id FROM crr_users WHERE id = $id;";
 	$cons=mysql_query($sql) or die (mysql_error());
 	$file=mysql_fetch_array($cons) or die (mysql_error());
 
 	echo "Hola <b>".$file[0]."</b> Ingresa tu nueva contraseña";
+	$id=$file[1];
 	?>
-	<form  method="POST"  name='form' onSubmit="obtenerDatos(this)">
+	<form  method="POST"  name='form' action="recoveryProces.php" onSubmit="obtenerDatos(this)">
 		<br><input type="password"  name="pass" placeholder="Nueva contraseña" required >
 		<br><input type="password" name ="passvery"placeholder="Repetir la nueva contraseña" required >
+		<input type='hidden' name ="id" value="<?php echo $id; ?>">
 		<br><br><input type="Submit" value="Cambiar">
+		<b>Agregar validador de formulario & cantidad de caracteres</b>
 
 	</form>
 
@@ -41,6 +46,9 @@ if($fechaActual > $fecha){
 		alert("Las contraseñas no coinciden");
 	}//END IF
 	else{
+
+    relocate('file.php',{'var1':'hola','var2':'mundo'});
+redirect();
 	alert(pass+" "+passverification);
 }//End ELSE
 }
@@ -49,4 +57,6 @@ if($fechaActual > $fecha){
 
         //echo "Aun falta algun tiempo";
 }
+
+
  ?>

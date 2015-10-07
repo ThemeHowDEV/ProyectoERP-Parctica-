@@ -42,6 +42,8 @@
 <form  action="" method="POST">
 <input type="text" name="dato" required placeholder="Ingrese usuario o correo electronico" size="50"><br><br>
 <input type="submit" value="Enviar">
+
+<br><a href="../../index.php" >Cancelar</a>
 </form>
 
 <?php 
@@ -61,9 +63,11 @@ while ($file=mysql_fetch_object($cons)) {
 
 if($file->id>=1)
 {
-    $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s",(strtotime ("+5 minutes")))));//Sumar minutos
+    $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s",(strtotime ("+15 minutes")))));//Sumar minutos
     $id=base64_encode(base64_encode(base64_encode($file->id)));
-    envio($fecha,$id);
+    $correo=$file->correo;
+    $user = $file->usuario;
+    envio($fecha,$id,$correo,$user);
     ?><div class="exito mensajes">Se ha enviado un correo de recuperacion a <?php echo $file->correo; ?></div><?php
 }
 else{

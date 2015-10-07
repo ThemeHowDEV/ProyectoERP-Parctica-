@@ -1,10 +1,12 @@
 <?php
 
-function envio($fecha,$id){
-   
-    $e_mail='ivan.rodriguez1986@hotmail.com';
+function envio($fecha,$id,$correo,$user){
+
+
+
+    $e_mail='valleriusSoftware.com';
     $nombre='Ivan';
-    $contenido='<a href="http://localhost/ProyectoERP-Parctica-/Email/RecoveryPass/recovery.php?Vm14YVUxUXhUWGxVYTJoVlYwaENWMWx0ZUhkalZsWnhVMjA1YWsxWGREVmFSVll3WVZaS2RHVkVRbGRpUmtZelZVWkZPVkJSUFQwPQ='.$fecha.'&VZaS2RHVkVRbGRpUmtZelZVWkZPVkJSUFQwPQ='.$id.'" >Link</a>';
+    $contenido='<a href="http://localhost/ProyectoERP-Parctica-/Email/RecoveryPass/recovery.php?Vm14YVUxUXhUWGxVYTJoVlYwaENWMWx0ZUhkalZsWnhVMjA1YWsxWGREVmFSVll3WVZaS2RHVkVRbGRpUmtZelZVWkZPVkJSUFQwPQ='.$fecha.'&VZaS2RHVkVRbGRpUmtZelZVWkZPVkJSUFQwPQ='.$id.'" >Aqui</a>';
     $empresa='UTEG';
     
     $fecha=  date("d-m-y");
@@ -17,7 +19,7 @@ function envio($fecha,$id){
 	$mail->Host       = "ssl://smtp.gmail.com";
     $mail->Username   = 'potara.cotosta@gmail.com';
     $mail->Password   = "hadess122486";
-    $mail -> Body ="El cliente $nombre ha comentado: ".$contenido." Email: ".$e_mail." Tel: $empresa";
+    $mail -> Body ="Hola! ".ucfirst($user)."<br>Para recuperar tu contraseña ingresa <b>".$contenido."<b/> <br>Te recordamos que este Link tiene 15 minutos de duracion para tu seguridad";
     $mail->IsHTML(TRUE);
 
     
@@ -28,8 +30,8 @@ function envio($fecha,$id){
 
 
     //====== PARA QUIEN =========
-    $mail->Subject    = "El Cliente ".$nombre." Ha comentdo";
-    $mail->AddAddress("mario.rodriguez@uteg.edu.mx","Para Admin");
+    $mail->Subject    = "Recuperacion de Contraseña";
+    $mail->AddAddress($correo,"Para usuario");
 	if($mail->Send()) {
 	} else {
 	?>
