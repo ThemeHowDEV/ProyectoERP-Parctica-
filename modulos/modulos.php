@@ -19,6 +19,9 @@ conectar(1);
    	case 'proveedores':
    		echo "Modulo de proveedores";
    		break;
+         case 'UsuariosEdit':
+           tbl_usrerEdit();
+            break;
    	default:
    		echo "<h1>El modulo al que intenta ingresar esta fuera de servicio</h1>";
    		break;
