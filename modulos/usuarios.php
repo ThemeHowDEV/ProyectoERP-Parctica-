@@ -61,7 +61,7 @@
 						<td>$file->correo</td>
 						<td>$file->descripcion</td>
 						<td>**************</td>
-						<td><a onclick='Modules(4)' href='#'>Editar todos </a><a title='Editar' href='Functions/users.php?opc=1&id=$file->id' >Editar</a>, Eliminar, bloquear</td>
+						<td><a title='Editar' href='Functions/users.php?opc=1&id=$file->id' >Editar</a>, Eliminar, bloquear</td>
 						
 					</tr>";
    	
@@ -70,9 +70,10 @@
 					
 				</tbody>
 			</table>
+			
 
 			<ul class="tabs">
-				<li class="active">Crear usuario</li>
+				<li class="active">Mas funciones</li>
 				<li>Eliminar usuarios</li>
 				<li>Bloquear usuarios</li>
 			</ul>
@@ -83,7 +84,10 @@
 
 			<div class="tabs">
 				<div class="js">
-					<p><h3>Crear un nuevo usuario para la plataforma</h3>
+					<a title="Nuevo usuario" href='#' >Nuevo Usuario</a><br>
+					<a title="Editar todos los usuarios" onclick='Modules(4)' href='#TablaUsuarios'>Editar todos los usuarios</a><br>
+					<a href="#" title="Eliminar Varios Usuarios" >Eliminar Usuarios</a><br>
+					<a href="#" title="Bloquear Varios Usuarios" >Bloquear Usuarios</a>
 				</div>
 
 
@@ -119,6 +123,19 @@ d
 
 function tbl_usrerEdit() 
 { 
+
+
+			function Roles()
+		{
+			$sqlRol="SELECT * FROM crr_rols WHERE id NOT IN(0) ORDER BY descripcion;";
+			$cons=mysql_query($sqlRol) or die (mysql_error());
+
+			while ($file=mysql_fetch_object($cons)) {
+				echo "<option value='".$file->id."'>".$file->descripcion."</option>";
+			}
+
+		} 
+
  $usuarios="SELECT u.id,u.usuario,u.nivel,r.descripcion,u.correo FROM crr_users u ,crr_rols r  WHERE r.id=u.nivel ORDER BY nivel;";
    $cons=mysql_query($usuarios) or die (mysql_error()."<br>".$usuarios);
 	?>
@@ -143,14 +160,16 @@ function tbl_usrerEdit()
 		<section>
 			<h1>Usuarios <span>configuracion</span></h1>
 
-			<div class="info">
+			<div id="Table" class="info">
 				<p>Tu rol de usuario es</p>
 
 				<p>Segun con el rol que ingrese, son los permisos hacia los usuarios</p>
 				<code>Permisos: Crear,Editar,Eliminar,bloquear,cambiar contraseña</code>.
 				<P><P>
 			</div>
-
+			<div id="TablaUsuarios"></div>
+			<form action="Functions/users.php" method="GET">
+				<input type="hidden" name="opc" value="2" >
 			<table id="example" class="display" cellspacing="0" width="100%">
 				<thead>
 					<tr>
@@ -158,7 +177,7 @@ function tbl_usrerEdit()
 						<th>Correo</th>
 						<th>Rol</th>
 						<th>Contraseña</th>
-						<th><img title="Herramientas" width='20%' src="img/icons/tools.png"></th>
+						
 						
 					</tr>
 				</thead>
@@ -169,21 +188,21 @@ function tbl_usrerEdit()
 						<th>Correo</th>
 						<th>Rol</th>
 						<th>Contraseña</th>
-						<th>Herramientas</th>
+						
 					</tr>
 				</tfoot>
 								<tbody>
 									<?php 
  while ($file=mysql_fetch_object($cons)) {
  	?> <tr>
-						<td><input type='text' <?php if ($file->id==1){ echo "readonly disabled style='color:RED;' "; } ?> value='<?php echo ucfirst($file->usuario); ?>'></td>
-						<td><input type='email' <?php if ($file->id==1){ echo "readonly disabled style='color:RED;' "; } ?> value='<?php echo $file->correo; ?>'></td>
+						<td><input required type='hidden' <?php if ($file->id==1){echo ""; } else {echo 'name ="id[]"'; } ?> value="<?php echo $file->id ?>"/>
+							<input required type='text' name="NombreUser[]"<?php if ($file->id==1){ echo "title='No se puede Editar el Super Administrador' readonly disabled style='color:RED;' "; } ?> value='<?php echo ucfirst($file->usuario); ?>'></td>
+						<td><input required type='email' name="Email[]" <?php if ($file->id==1){ echo "readonly title='No se puede Editar el Super Administrador' disabled style='color:RED;' "; } ?> value='<?php echo $file->correo; ?>'></td>
 						<?php if ($file->id==1) 
 						{
 						?>
 						<td>
-						<select disabled>
-							<option>Hacer en base de la talbla crr_rols</option>
+						<select title='No se puede Editar el Super Administrador' disabled>
 							<option selected >Super Administrador</option>
 							<option>Usuario</option>
 							<option>ETC...</option>
@@ -193,17 +212,21 @@ function tbl_usrerEdit()
 						 } 
 						else { ?> 
 						<td>
-						<select>
-							<option>Hacer en base de la talbla crr_rols</option>
-							<option>Administrador</option>
-							<option>Usuario</option>
-							<option>ETC...</option>
+							
+						<select required name ='Roles[]'>
+							<?php	Roles(); ?>
 						</select>
 					    </td> 
 						<?php } ?>
 						
-						<td><input type='password' <?php if ($file->id==1){ echo "readonly disabled style='color:RED;' "; } ?> value=''></td>
-						<td><a onclick='Modules(4)' href='#'>Editar todos </a><a title='Editar' href='Functions/users.php?opc=1&id=<?php echo $file->id; ?> ' >Editar</a>, Eliminar, bloquear</td>
+						<td><input  type='password' 
+							<?php if ($file->id==1)
+							{ echo "readonly title='No se puede Editar el Super Administrador' disabled style='color:RED;' title ='No se puede cambiar la contraseña para el Super Administrador' placeholder='No se puede cambiar la contraseña'"; }
+							else {
+								echo 'name="password[]" title ="Ingrese la nueva Contraseña para '.strtoupper ($file->usuario).'" required placeholder="Ingrese la nueva Contraseña"';
+							}
+							?> value=''></td>
+						
 						
 					</tr>
    	
@@ -212,9 +235,12 @@ function tbl_usrerEdit()
 					
 				</tbody>
 			</table>
+			<input type="Submit" name="Editar usuarios">
+</form>
 
 			<ul class="tabs">
-				<li class="active">Crear usuario</li>
+
+				<li class="active">Mas Funeciones</li>
 				<li>Eliminar usuarios</li>
 				<li>Bloquear usuarios</li>
 			</ul>
@@ -225,7 +251,7 @@ function tbl_usrerEdit()
 
 			<div class="tabs">
 				<div class="js">
-					<p><h3>Crear un nuevo usuario para la plataforma</h3>
+					<a onclick='Modules(1)' href='#'>Cancelar </a>
 				</div>
 
 
