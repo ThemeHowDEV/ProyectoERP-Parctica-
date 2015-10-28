@@ -54,20 +54,21 @@ $dato = $_POST['dato'];
 include '../../conexion.php';
 conectar(1);
 
-$sql="SELECT COUNT(id) id,usuario,correo FROM crr_users WHERE usuario ='$dato' OR correo ='$dato';";
+$sql="SELECT COUNT(id) id,id id_user, usuario,correo FROM crr_users WHERE usuario ='$dato' OR correo ='$dato';";
 
 $cons=mysql_query($sql) or die (mysql_error());
 
 while ($file=mysql_fetch_object($cons)) {
 
-
 if($file->id>=1)
 {
+    
     $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s",(strtotime ("+15 minutes")))));//Sumar minutos
-    $id=base64_encode(base64_encode(base64_encode($file->id)));
+    $id=base64_encode(base64_encode(base64_encode($file->id_user)));
     $correo=$file->correo;
     $user = $file->usuario;
     envio($fecha,$id,$correo,$user);
+   // echo  "envio(".$fecha.",".base64_decode(base64_decode(base64_decode($id))).",".$correo.",".$user.");";
     ?><div class="exito mensajes">Se ha enviado un correo de recuperacion a <?php echo $file->correo; ?></div><?php
 }
 else{
