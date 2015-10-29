@@ -22,8 +22,21 @@ a:hover{
 	
 }
 
+#inmobil{
+	position:absolute;
+	margin-left:2%;	
+	
+}
+
 .enlaces{
 	font-weight:bold;
 	font-size:120%;
+	
+}
+
+.principal{
+	position:relative;
+	margin-left:30%;	
+	margin-top:10%;
 	
 }

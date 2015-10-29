@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Usuarios y configuracion ::::::::::::::::::::</title>
+		<title>:::::::MENU PRINCIPAL:::::::</title>
 	
 		<!--METADATOS-->
 		<meta charset="utf-8">
