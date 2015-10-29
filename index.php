@@ -25,6 +25,7 @@
 			<div id="cuadros" align="center" class="fuentes">			
 			<div id="fuentes">
 				<br/>
+				Acceder<br/><br/>
 				Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
 				<input type='text' name='user' size="40" /><br/><br/>
 				Contrase&ntilde;a</td>&nbsp;:&nbsp;

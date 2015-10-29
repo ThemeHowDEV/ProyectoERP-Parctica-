@@ -35,17 +35,16 @@
 				WHERE p.id_user='.$_SESSION["id"].'
 				AND m.estado=1
 				AND p.id_modulo=m.id';
-				//echo $sql;
 				$consul=mysql_query($sql) or die (mysql_error()."<br>".$sql);
 
 				while ($result=mysql_fetch_object($consul)) 
 				{
 
-					?><a onclick='Modules("<?php echo $result->id; ?>")' href="#"><?php echo $result->modulo;?></a>
+			?>	<a onclick='Modules("<?php echo $result->id; ?>")' href="#"><?php echo $result->modulo;?></a>
 					<?php
 						echo "<br>";
 				}
-			?>	
+					?>	
 			</div>
 			
 			
@@ -59,7 +58,7 @@
 				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
 				<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
 				<?php
-				//echo "Eres Super Admin";
+				//echo "Super Usuario";
 				echo '<div id="Modulos">
 					
 				</div>';
@@ -85,7 +84,7 @@
 				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
 				<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
 				<?php
-				echo "eres user";
+				echo "Usuario Normal";
 					echo '<div id="Modulos">
 					
 				</div>';
