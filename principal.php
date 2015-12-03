@@ -31,23 +31,30 @@
 			<div id="inmobil">
 			<?php
 				echo "<h1>Bienvenido ".$_SESSION["usuario"]."</h1>";
-				$sql='SELECT m.id,m.nombre modulo,m.html enlace,m.estado,p.id_user permiso FROM crr_modules m, CRR_permissions p
-				WHERE p.id_user='.$_SESSION["id"].'
-				AND m.estado=1
-				AND p.id_modulo=m.id';
-				$consul=mysql_query($sql) or die (mysql_error()."<br>".$sql);
+			$sql='SELECT m.id,
+						 m.nombre modulo,
+						 m.html enlace,
+						 m.estado,
+						 p.id_user permiso 
+					FROM crr_modules m, 
+					     CRR_permissions p
+				   WHERE p.id_user='.$_SESSION["id"].'
+					 AND m.estado=1
+					 AND p.id_modulo=m.id';
+			$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
 
-				while ($result=mysql_fetch_object($consul)) 
-				{
+			while ($result=mysql_fetch_object($consul)) {
 
-			?>	<a onclick='Modules("<?php echo $result->id; ?>")' href="#"><?php echo $result->modulo;?></a>
-					<?php
-						echo "<br>";
+			?>	<a onclick='Modules("<?php echo $result->id; ?>")' href="#" >
+					<?php echo $result->modulo;?>
+				</a>
+				<?php
+					echo "<br/>";
 				}
-					?>	
+				?>	
 			</div>
 			
-			
+			<!--INFORMACION DE FOTO, TIPO DE USUARIO Y CIERRE DE SESION-->
 			<div id="info">
 			<br/>
 			<?php 
@@ -58,10 +65,8 @@
 				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
 				<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
 				<?php
-				//echo "Super Usuario";
-				echo '<div id="Modulos">
-					
-				</div>';
+				echo "Super Usuario<br/>";
+				//echo '<div id="Modulos"/>';
 			}
 			elseif($_SESSION['nivel']==1)
 			{
@@ -71,10 +76,8 @@
 				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
 				&nbsp;&nbsp;&nbsp;&nbsp;<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
 				<?php
-				echo "Administrador";
-					echo '<div id="Modulos">
-					
-				</div>';
+				echo "Administrador<br/>";
+				//	echo '<div id="Modulos"/>';
 			}
 			elseif($_SESSION['nivel']==2)
 			{
@@ -84,10 +87,8 @@
 				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
 				<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
 				<?php
-				echo "Usuario Normal";
-					echo '<div id="Modulos">
-					
-				</div>';
+				echo "Usuario Normal<br/>";
+					//echo '<div id="Modulos"/>';
 			} else
 				 {
 						 ?>
@@ -102,6 +103,52 @@
 		 ?>
 		 <a href='exit.php'>Cerrar Session</a>
 		 
-		 </div>
+		 </div><br/>
+		 
+		 
+		 
+		 <!--MUESTREO DE LOS MODULOS Y SUS TABLAS-->
+			<div>
+			<br/>
+			<?php 		
+			if(isset($_SESSION["usuario"])){
+				
+				$sql='SELECT m.id,
+							 m.nombre modulo,
+							 m.html enlace,
+							 m.estado,
+							 p.id_user permiso 
+						FROM crr_modules m, 
+							 CRR_permissions p
+					   WHERE p.id_user='.$_SESSION["id"].'
+						 AND m.estado=1
+						 AND p.id_modulo=m.id';
+			$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);		
+			
+				
+			 if($_SESSION['nivel']==0){					
+				echo '<div id="Modulos"/>';	
+			}
+			elseif($_SESSION['nivel']==1)
+			{				 
+				echo '<div id="Modulos"/>';
+			}
+			elseif($_SESSION['nivel']==2)
+			{			
+				echo '<div id="Modulos"/>';
+			} 
+			}
+			else
+				 {
+						 ?>			
+			<script languaje="JavaScript" type="text/javascript">alert("No has iniciado sesion");location.href="index.php";</script>
+						<?php
+						}
+						?>
+		 		 
+		 </div><br/>
+		
+		
+		
 		</body>
 </html>
