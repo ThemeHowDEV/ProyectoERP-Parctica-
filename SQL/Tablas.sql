@@ -16,6 +16,33 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`erpshoes` /*!40100 DEFAULT CHARACTER SE
 
 USE `erpshoes`;
 
+/*Table structure for table `crr_componentes` */
+
+DROP TABLE IF EXISTS `crr_componentes`;
+
+CREATE TABLE `crr_componentes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Descripcion` text,
+  `id_unidad` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_componentes` */
+
+/*Table structure for table `crr_departamentos` */
+
+DROP TABLE IF EXISTS `crr_departamentos`;
+
+CREATE TABLE `crr_departamentos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Descripcion` text,
+  `orden` int(5) DEFAULT NULL,
+  `id_jefe` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_departamentos` */
+
 /*Table structure for table `crr_ejecution_fuctions` */
 
 DROP TABLE IF EXISTS `crr_ejecution_fuctions`;
@@ -46,6 +73,36 @@ CREATE TABLE `crr_functions` (
 
 insert  into `crr_functions`(`id`,`nombre`,`Section`) values (1,'crear','user'),(2,'editar','user'),(3,'eliminar','user'),(4,'bloquear','user'),(5,'permisos','user');
 
+/*Table structure for table `crr_lote` */
+
+DROP TABLE IF EXISTS `crr_lote`;
+
+CREATE TABLE `crr_lote` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lote` int(50) DEFAULT NULL,
+  `id_modelo` int(50) DEFAULT NULL,
+  `pares` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_lote` */
+
+/*Table structure for table `crr_modelo` */
+
+DROP TABLE IF EXISTS `crr_modelo`;
+
+CREATE TABLE `crr_modelo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` text,
+  `id_componente` int(50) DEFAULT NULL,
+  `notas` text,
+  `imagen` text,
+  `id_temporada` int(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_modelo` */
+
 /*Table structure for table `crr_modules` */
 
 DROP TABLE IF EXISTS `crr_modules`;
@@ -72,11 +129,24 @@ CREATE TABLE `crr_permissions` (
   `id_modulo` int(10) DEFAULT NULL,
   `id_user` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `crr_permissions` */
 
 insert  into `crr_permissions`(`id`,`id_modulo`,`id_user`) values (1,1,1),(2,1,3),(3,2,1),(4,3,1),(5,3,5);
+
+/*Table structure for table `crr_procesos` */
+
+DROP TABLE IF EXISTS `crr_procesos`;
+
+CREATE TABLE `crr_procesos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` text,
+  `id_departamento` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_procesos` */
 
 /*Table structure for table `crr_rols` */
 
@@ -91,6 +161,31 @@ CREATE TABLE `crr_rols` (
 /*Data for the table `crr_rols` */
 
 insert  into `crr_rols`(`id`,`descripcion`) values (0,'Super Administrador'),(1,'Administrador'),(2,'Usuario'),(3,'Colaborador'),(4,'Empleado'),(6,'Proveedor');
+
+/*Table structure for table `crr_temporada` */
+
+DROP TABLE IF EXISTS `crr_temporada`;
+
+CREATE TABLE `crr_temporada` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descripcion` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_temporada` */
+
+/*Table structure for table `crr_unidades` */
+
+DROP TABLE IF EXISTS `crr_unidades`;
+
+CREATE TABLE `crr_unidades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Descripcion` text,
+  `tipo` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_unidades` */
 
 /*Table structure for table `crr_users` */
 
