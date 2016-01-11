@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>:::::INGRESO:::::</title>
+		<title>:::::INGRESOS:::::</title>
 		
 		<!--IMPORTAMOS FUENTES DE GOOGLE-->
 		<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
