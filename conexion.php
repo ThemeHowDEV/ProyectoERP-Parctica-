@@ -1,19 +1,27 @@
 <?php
-function conectar($conectar)
+function conectar($con)
 {
-    $link="";
-    if($conectar==1)
-        {
-        $link = mysql_connect('localhost','root','') 
-                or die ("No se pudo conectar :(");
-        mysql_select_db('ERPSHOES')
-        or die ("Base de Datos invalida ://");
-        }
-        if($conectar==0)
-            {
-            $link= mysql_connect('localhost','root','');
-            mysql_close();//para cerrar la base de datos
-            }
-}//ivan MAster
-//Fer Slave
+    if ($con == 1) {
+        # Conectar...
+        #$mysqli = new mysqli('localhost','root','','ERPSHOES');//Local 
+        $mysqli = new mysqli("mysql.hostinger.es", "u136363300_erpsh", "vmSwDql3kw", "u136363300_erpsh");//HOSTING
+if ($mysqli->connect_errno) {
+    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+}
+
+    }//END 1
+    if ($con == 0) {
+
+        # Desconectar...
+       # $mysqli = new mysqli('localhost','root','','ERPSHOES');//Local 
+        $mysqli = new mysqli("mysql.hostinger.es", "u136363300_erpsh", "vmSwDql3kw", "u136363300_erpsh");
+if ($mysqli->connect_errno) {
+    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+        $mysqli->close();
+    }
+
+}
+
+return $mysqli;
+}
 ?>

@@ -24,14 +24,14 @@
 		
 			<?php 
 				include 'conexion.php';
-				conectar(1);
+				$mysqli=conectar(1);
 				session_start();
 				if(isset($_SESSION["usuario"])){
 			?>		
 			<div id="inmobil">
 			<?php
 				echo "<h1>Bienvenido ".$_SESSION["usuario"]."</h1>";
-			$sql='SELECT m.id,
+			$mysqli->real_query ('SELECT m.id,
 						 m.nombre modulo,
 						 m.html enlace,
 						 m.estado,
@@ -40,17 +40,21 @@
 					     CRR_permissions p
 				   WHERE p.id_user='.$_SESSION["id"].'
 					 AND m.estado=1
-					 AND p.id_modulo=m.id';
-			$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
+					 AND p.id_modulo=m.id');
+			//$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
+					 $resultado = $mysqli->use_result();
 
-			while ($result=mysql_fetch_object($consul)) {
 
-			?>	<a onclick='Modules("<?php echo $result->id; ?>")' href="#" >
-					<?php echo $result->modulo;?>
+					while ($fila = $resultado->fetch_assoc())
+					 {
+					 	?>
+					 	<a onclick='Modules("<?php echo $fila['id']; ?>")' href="#" >
+					<?php echo $fila['modulo']; ?>
 				</a>
 				<?php
 					echo "<br/>";
-				}
+					 	 
+					 } 
 				?>	
 			</div>
 			
@@ -111,32 +115,10 @@
 			<div>
 			<br/>
 			<?php 		
-			if(isset($_SESSION["usuario"])){
-				
-				$sql='SELECT m.id,
-							 m.nombre modulo,
-							 m.html enlace,
-							 m.estado,
-							 p.id_user permiso 
-						FROM crr_modules m, 
-							 CRR_permissions p
-					   WHERE p.id_user='.$_SESSION["id"].'
-						 AND m.estado=1
-						 AND p.id_modulo=m.id';
-			$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);		
-			
-				
-			 if($_SESSION['nivel']==0){					
+			if(isset($_SESSION["usuario"])){		
 				echo '<div id="Modulos"/>';	
-			}
-			elseif($_SESSION['nivel']==1)
-			{				 
-				echo '<div id="Modulos"/>';
-			}
-			elseif($_SESSION['nivel']==2)
-			{			
-				echo '<div id="Modulos"/>';
-			} 
+			
+			 
 			}
 			else
 				 {
