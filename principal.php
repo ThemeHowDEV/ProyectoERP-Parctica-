@@ -37,7 +37,7 @@
 						 m.estado,
 						 p.id_user permiso 
 					FROM crr_modules m, 
-					     CRR_permissions p
+					     crr_permissions p
 				   WHERE p.id_user='.$_SESSION["id"].'
 					 AND m.estado=1
 					 AND p.id_modulo=m.id');

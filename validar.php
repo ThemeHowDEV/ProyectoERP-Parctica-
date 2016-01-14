@@ -11,7 +11,7 @@ $passMD5 = md5($pass);
 
 
 
-$consulta = $mysqli->query("SELECT * FROM CRR_USERS WHERE usuario ='$user' AND pass ='$passMD5';");
+$consulta = $mysqli->query("SELECT * FROM crr_users WHERE usuario ='$user' AND pass ='$passMD5';");
 $fila = $consulta->fetch_assoc();
 
 
