@@ -11,7 +11,13 @@ $passMD5 = md5($pass);
 
 
 
-$consulta = $mysqli->query("SELECT * FROM crr_users WHERE usuario ='$user' AND pass ='$passMD5';");
+$consulta = $mysqli->query("
+    SELECT us.id,us.usuario,us.nivel,us.correo,r.descripcion
+FROM crr_users us,crr_rols r
+WHERE us.usuario = '$user' 
+AND us.pass = MD5('$pass') 
+AND us.nivel = r.id;
+    ");
 $fila = $consulta->fetch_assoc();
 
 
@@ -29,7 +35,7 @@ if($validado >= 1)
             $_SESSION["usuario"]=$fila['usuario'];
             $_SESSION["nivel"]=$fila['nivel'];
             $_SESSION["correo"]=$fila['correo'];
-            //$_SESSION["imagen"]=$file['imagen'];
+            $_SESSION["tipo"]=$fila['descripcion'];
 }
 else
 {

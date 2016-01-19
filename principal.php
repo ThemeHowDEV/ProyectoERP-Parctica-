@@ -17,7 +17,10 @@
 		<link rel="stylesheet" type="text/css" href="css/text.css" media="screen" />
 	   
 	    <!--IMPORTAMOS JAVASCRIPT-->
-		<script languaje="JavaScript" type="text/javascript">function Modules(id){var idT =id;$("#Modulos").load('modulos/modulos.php', { id: idT})}</script>
+		<script languaje="JavaScript" type="text/javascript">
+		function Modules(id){var idT =id;
+			$("#Modulos").load('modulos/modulos.php', { id: idT})}
+			</script>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</head>
 		<body>
@@ -30,7 +33,7 @@
 			?>		
 			<div id="inmobil">
 			<?php
-				echo "<h1>Bienvenido ".$_SESSION["usuario"]."</h1>";
+				echo "<h1>Bienvenido <b>".ucwords($_SESSION["usuario"])."</b></h1>";
 			$mysqli->real_query ('SELECT m.id,
 						 m.nombre modulo,
 						 m.html enlace,
@@ -41,6 +44,7 @@
 				   WHERE p.id_user='.$_SESSION["id"].'
 					 AND m.estado=1
 					 AND p.id_modulo=m.id');
+		
 			//$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
 					 $resultado = $mysqli->use_result();
 
@@ -54,51 +58,22 @@
 				<?php
 					echo "<br/>";
 					 	 
-					 } 
+					 }
+					 $mysqli=conectar(0); 
 				?>	
 			</div>
 			
 			<!--INFORMACION DE FOTO, TIPO DE USUARIO Y CIERRE DE SESION-->
 			<div id="info">
 			<br/>
-			<?php 
-			 if($_SESSION['nivel']==0){
-				?>
 				<a style='cursor: url(img/icons/edit.png), auto !important; text-align: center;' 
 				href="Functions/ConfigUser.php?opc=4" 
 				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
 				<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
 				<?php
-				echo "Super Usuario<br/>";
-				//echo '<div id="Modulos"/>';
-			}
-			elseif($_SESSION['nivel']==1)
-			{
-				 ?>
-				<a style='cursor: url(img/icons/edit.png), auto !important; text-align: center;' 
-				href="Functions/ConfigUser.php?opc=4" 
-				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
-				&nbsp;&nbsp;&nbsp;&nbsp;<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
-				<?php
-				echo "Administrador<br/>";
-				//	echo '<div id="Modulos"/>';
-			}
-			elseif($_SESSION['nivel']==2)
-			{
-				 ?>
-				<a style='cursor: url(img/icons/edit.png), auto !important; text-align: center;' 
-				href="Functions/ConfigUser.php?opc=4" 
-				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
-				<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>
-				<?php
-				echo "Usuario Normal<br/>";
+				echo  $_SESSION["tipo"]."<br/>";
 					//echo '<div id="Modulos"/>';
-			} else
-				 {
-						 ?>
-			<script languaje="JavaScript" type="text/javascript">alert("No has iniciado sesion");location.href="index.php";</script>
-						<?php
-						}
+			
 						}
 						else{  ?>
 			<script languaje="JavaScript" type="text/javascript">alert("No has iniciado sesion");location.href="index.php";</script>
@@ -123,7 +98,9 @@
 			else
 				 {
 						 ?>			
-			<script languaje="JavaScript" type="text/javascript">alert("No has iniciado sesion");location.href="index.php";</script>
+			<script languaje="JavaScript" type="text/javascript">
+			alert("No has iniciado sesion");
+			location.href="index.php";</script>
 						<?php
 						}
 						?>

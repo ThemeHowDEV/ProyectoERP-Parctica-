@@ -1,7 +1,5 @@
-<?php function tbl_usrer() { 
+<?php function tbl_usrer($mysqli) { 
 
- $usuarios="SELECT u.id,u.usuario,u.nivel,r.descripcion,u.correo FROM crr_users u ,crr_rols r  WHERE r.id=u.nivel ORDER BY nivel;";
-   $cons=mysql_query($usuarios) or die (mysql_error()."<br>".$usuarios);
 	?>
 
 
@@ -54,18 +52,29 @@
 					</tr>
 				</tfoot>
 								<tbody>
+
 									<?php 
- while ($file=mysql_fetch_object($cons)) {
- 	echo "<tr>
-						<td>".ucfirst($file->usuario)."</td>
-						<td>$file->correo</td>
-						<td>$file->descripcion</td>
+
+$mysqli->real_query("SELECT u.id,u.usuario,u.nivel,r.descripcion,u.correo 
+ FROM crr_users u ,crr_rols r  
+ WHERE r.id=u.nivel ORDER BY nivel");
+   
+
+    $resultado = $mysqli->use_result();
+
+while ($fila = $resultado->fetch_object())
+					 {
+                       echo "<tr>
+						<td>".ucfirst($fila->usuario)."</td>
+						<td>".$fila->correo."</td>
+						<td>".$fila->descripcion."</td>
 						<td>**************</td>
-						<td><a title='Editar' href='Functions/users.php?opc=1&id=$file->id' >Editar</a>, Eliminar, bloquear</td>
+						<td><a title='Editar' href='Functions/users.php?opc=1&id=".$fila->id.
+						" >Editar</a>, Eliminar, bloquear</td>
 						
 					</tr>";
-   	
-   }?>
+					 }
+					 ?>
 				
 					
 				</tbody>
