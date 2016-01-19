@@ -60,9 +60,9 @@ $mysqli->real_query("SELECT u.id,u.usuario,u.nivel,r.descripcion,u.correo
  WHERE r.id=u.nivel ORDER BY nivel");
    
 
-    $resultado = $mysqli->use_result();
+    $ConsUsuario = $mysqli->use_result();
 
-while ($fila = $resultado->fetch_object())
+while ($fila = $ConsUsuario->fetch_object())
 					 {
                        echo "<tr>
 						<td>".ucfirst($fila->usuario)."</td>
