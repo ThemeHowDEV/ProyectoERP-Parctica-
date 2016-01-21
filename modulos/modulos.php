@@ -25,6 +25,28 @@ $modulos->free_result();
          case 'UsuariosEdit':
            tbl_usrerEdit();
             break;
+            case 'Configuraciones':
+               ?>
+                  <!--IMPORTAMOS JAVASCRIPT-->
+                  <script languaje="JavaScript" type="text/javascript">
+                  function Temps()
+                  {
+                  $("#ContenidosConf").load('modulos/config/temporadas.php');
+                  }
+                  </script>
+
+               <div align="center">
+                  <h1>Configuraciones Generales</h1>
+               <!--<img src="img/icons/Config.png">
+               </div>-->
+               <div align="center">
+                  <a onclick='Temps()' title="Temporadas" href="#"><img width="5%" height="5%" src="img/icons/temp.png"></a>
+               </div>
+               <br>
+               <div align="center" id="ContenidosConf">
+               </div>
+               <?php
+               break;
    	default:
    		echo "<h1>El modulo al que intenta ingresar esta fuera de servicio</h1>";
    		break;

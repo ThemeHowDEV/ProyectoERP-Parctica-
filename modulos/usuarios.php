@@ -54,7 +54,6 @@
 								<tbody>
 
 									<?php 
-
 $mysqli->real_query("SELECT u.id,u.usuario,u.nivel,r.descripcion,u.correo 
  FROM crr_users u ,crr_rols r  
  WHERE r.id=u.nivel ORDER BY nivel");
@@ -70,7 +69,7 @@ while ($fila = $ConsUsuario->fetch_object())
 						<td>".$fila->descripcion."</td>
 						<td>**************</td>
 						<td><a title='Editar' href='Functions/users.php?opc=1&id=".$fila->id.
-						" >Editar</a>, Eliminar, bloquear</td>
+						" '>Editar</a>, Eliminar, bloquear</td>
 						
 					</tr>";
 					 }
