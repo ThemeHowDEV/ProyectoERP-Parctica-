@@ -42,7 +42,7 @@ else
 ?>
 <script langueje="JavaScript" type="text/javascript">
     alert("Usuario o password incorrectos");
-    location.href="index.php";
+    location.href="index.html";
 </script>
 <?php
 }}
@@ -50,7 +50,7 @@ else
 {
     ?>
     <script langueje="JavaScript" type="text/javascript">
-    location.href="index.php";
+    location.href="index.html";
 </script>
     <?php
 }
