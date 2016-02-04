@@ -1,6 +1,6 @@
   <?php 
         include '../conexion.php';
-        include '../functions/fechas.php';
+        include '../Functions/fechas.php';
         $mysqli=conectar(1);
         session_start();
         if(isset($_SESSION["usuario"]))

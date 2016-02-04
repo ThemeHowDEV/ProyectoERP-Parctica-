@@ -20,14 +20,13 @@ AND us.nivel = r.id;
     ");
 $fila = $consulta->fetch_assoc();
 
-
 $validado=$mysqli->affected_rows;//mysql_affected_rows();
 
 if($validado >= 1)
 {
     
     $nombre=$fila['usuario'];
-    header("location: principal/index.php");//traer el nombre
+    header("location: Principal/index.php");//traer el nombre
     //header("location: principal.php?nom=$nombre");//traer el nombre
     /*Crearmos las variebles de session*/
 
