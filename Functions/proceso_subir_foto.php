@@ -5,5 +5,5 @@ echo '<img src="../img/users/'.$id.'.jpg" />';
 ?>
 <script languaje="JavaScript" type="text/javascript">
     alert("Foto ingresada con exito :D");
-    location.href="../principal.php";
+    location.href="../principal/index.php";
 </script>

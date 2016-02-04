@@ -66,7 +66,7 @@
 			<!--INFORMACION DE FOTO, TIPO DE USUARIO Y CIERRE DE SESION-->
 			<div id="info">
 			<br/>
-				<a style='cursor: url(img/icons/edit.png), auto !important; text-align: center;' 
+				<a style='cursor: url(../img/icons/edit.png), auto !important; text-align: center;' 
 				href="Functions/ConfigUser.php?opc=4" 
 				title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">
 				<img  width=50 height=50 src="img/users/<?php echo $_SESSION["id"]; ?>.jpg"  onerror="src='img/users/default.png'"></a><br>

@@ -75,11 +75,11 @@
 					<input type="hidden" name="id" value="<?php echo  $_SESSION["id"]; ?>">
 					<input type="file" name="foto"><br/><br/>
 					<a href="#" class="enlaces" onclick="document.forms['edicion_perfil'].submit();">Subir</a>&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;
-					<a href='../principal.php' class="enlaces">Cancelar</a><br/><br/>
+					<a href='../principal/index.php' class="enlaces">Cancelar</a><br/><br/>
 				<?php
 								break;
 							default:
-								header("principal.php");
+								header("../principal/index.php");
 								break;
 						}
 					}

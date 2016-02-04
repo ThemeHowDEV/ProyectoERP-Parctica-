@@ -27,7 +27,7 @@ if($validado >= 1)
 {
     
     $nombre=$fila['usuario'];
-    header("location: principal.php");//traer el nombre
+    header("location: principal/index.php");//traer el nombre
     //header("location: principal.php?nom=$nombre");//traer el nombre
     /*Crearmos las variebles de session*/
 
