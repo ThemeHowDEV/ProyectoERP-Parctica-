@@ -18,7 +18,7 @@ function envio($fecha,$id,$correo,$user){
     $mail->Port       = 465;
 	$mail->Host       = "ssl://smtp.gmail.com";
     $mail->Username   = 'potara.cotosta@gmail.com';
-    $mail->Password   = "hadess122486";
+    $mail->Password   = "hadesspotaitai";
     $mail -> Body ="Hola! ".ucfirst($user)."<br>Para recuperar tu contraseña ingresa <b>".$contenido."<b/> <br>Te recordamos que este Link tiene 15 minutos de duracion para tu seguridad";
     $mail->IsHTML(TRUE);
 
@@ -34,10 +34,18 @@ function envio($fecha,$id,$correo,$user){
     $mail->AddAddress($correo,"Para usuario");
 	if($mail->Send()) {
 	} else {
+
+
+        try {
+            $mail->Send();
+        } catch (Exception $e) {
+            echo "Error al envira: ".$e;
+            
+        }
 	?>
             <SCRIPT LANGUAGE="javascript">
                 alert('No se ha podido enviar su mensaje, favor de intentarlo mas tarde');
-			location.href = "index.php";
+			//location.href = "index.php";
 			</SCRIPT>
             <?php
 	}

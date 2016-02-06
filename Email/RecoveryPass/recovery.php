@@ -17,15 +17,16 @@ if($fechaActual > $fecha){
 	<?php
         //echo "La fecha entrada ya ha pasado";
 }else{
-	conectar(1);
+	$mysqli=conectar(1);
 	$id=base64_decode(base64_decode(base64_decode($id)));
 
-	$sql="SELECT usuario,id FROM crr_users WHERE id = $id;";
-	$cons=mysql_query($sql) or die (mysql_error());
-	$file=mysql_fetch_array($cons) or die (mysql_error());
+	$consulta = $mysqli->query("SELECT usuario,id FROM crr_users WHERE id = $id;");
+	//$cons=mysql_query($sql) or die (mysql_error());
+	//$file=mysql_fetch_array($cons) or die (mysql_error());
+	$file = $consulta->fetch_assoc();
 
-	echo "Hola <b>".$file[0]."</b> Ingresa tu nueva contraseña";
-	$id=$file[1];
+	echo "Hola <b>".$file['usuario']."</b> Ingresa tu nueva contraseña";
+	$id=$file['id'];
 	?>
 	<form  method="POST"  name='form' action="recoveryProces.php" onSubmit="obtenerDatos(this)">
 		<br><input type="password"  name="pass" placeholder="Nueva contraseña" required >

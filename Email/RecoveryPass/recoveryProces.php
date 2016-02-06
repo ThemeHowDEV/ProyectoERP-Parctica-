@@ -23,22 +23,31 @@
 	<script type="text/javascript" src="jquery-1.2.6.js"></script>
     <script type="text/javascript">
      function redireccionar(){
-  location.href="../../index.php";
+  location.href="../../index.html";
 } 
 setTimeout ("redireccionar()", 15000);
 </script>
 <?php 
 include '../../conexion.php';
-conectar(1);
+$mysqli=conectar(1);
 
 $NewPass=$_POST['pass'];
 $id = $_POST['id'];
 $PassEncript=md5($NewPass);
 
-$sql="UPDATE crr_users SET pass='$PassEncript' WHERE id=$id;";
-mysql_query($sql) or die (mysql_error()."<br>".$sql);
+try{
 
+if (!$mysqli->query("UPDATE crr_users SET pass='$PassEncript' WHERE id=$id;"))
+ { 
+    throw new Exception('error!'); 
+ }
 
-conectar(0);
+}catch( Exception $e ){
+    echo "<br>error type -> ".$e;
+  $mysqli->rollback();
+}
+printf("Affected rows (UPDATE): %d\n", $mysqli->affected_rows);
+$mysqli->commit();
+$mysqli=conectar(0);
  ?>
  <div class="exito mensajes">La contraseña se ha cambiado con exito </div>

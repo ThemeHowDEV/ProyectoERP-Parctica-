@@ -43,7 +43,7 @@
 <input type="text" name="dato" required placeholder="Ingrese usuario o correo electronico" size="50"><br><br>
 <input type="submit" value="Enviar">
 
-<br><a href="../../index.php" >Cancelar</a>
+<br><a href="../../index.html" >Cancelar</a>
 </form>
 
 <?php 
@@ -52,43 +52,33 @@ if(isset($_POST['dato']))
 $dato = $_POST['dato'];
 
 include '../../conexion.php';
-conectar(1);
+$mysqli=conectar(1);
 
-$sql="SELECT COUNT(id) id,id id_user, usuario,correo FROM crr_users WHERE usuario ='$dato' OR correo ='$dato';";
 
-$cons=mysql_query($sql) or die (mysql_error());
+$consulta = $mysqli->query("SELECT COUNT(id) id,id id_user, usuario,correo FROM crr_users WHERE usuario ='$dato' OR correo ='$dato';");
+//$sql="SELECT COUNT(id) id,id id_user, usuario,correo FROM crr_users WHERE usuario ='$dato' OR correo ='$dato';";
+//$cons=mysql_query($sql) or die (mysql_error());
 
-while ($file=mysql_fetch_object($cons)) {
+while ($fila = $consulta->fetch_assoc()){
 
-if($file->id>=1)
+//while ($file=mysql_fetch_object($cons)) {
+
+if($fila['id']>=1)
 {
     
     $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s",(strtotime ("+15 minutes")))));//Sumar minutos
-    $id=base64_encode(base64_encode(base64_encode($file->id_user)));
-    $correo=$file->correo;
-    $user = $file->usuario;
-    envio($fecha,$id,$correo,$user);
-   // echo  "envio(".$fecha.",".base64_decode(base64_decode(base64_decode($id))).",".$correo.",".$user.");";
-    ?><div class="exito mensajes">Se ha enviado un correo de recuperacion a <?php echo $file->correo; ?></div><?php
+    $id=base64_encode(base64_encode(base64_encode($fila['id_user'])));
+    $correo=$fila['correo'];
+    $user = $fila['usuario'];
+   envio($fecha,$id,$correo,$user);
+    //echo  "envio(".$fecha.",".base64_decode(base64_decode(base64_decode($id))).",".$correo.",".$user.");";
+    ?><div class="exito mensajes">Se ha enviado un correo de recuperacion a <?php echo $fila['correo']; ?></div><?php
 }
 else{
 	echo '<div class="error">No se encontraron datos</div> '; }
 
 }}
    else{ }
-    /*echo $fecha=base64_encode(base64_encode(date("Y-m-d H:i:s",(strtotime ("+2 minutes")))));//Sumar minutos
-echo "<br>";
-    echo base64_decode(base64_decode($fecha)); 
-echo "<br>";*/
-
-/*
-$fecha_actual = $fecha;
-$fecha_entrada = $fecha;
-if($fecha_actual > $fecha_entrada){
-        echo "La fecha entrada ya ha pasado";
-}else{
-        echo "Aun falta algun tiempo";
-}*/
 ?>
 </body>
 </html>
