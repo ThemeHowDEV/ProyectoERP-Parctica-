@@ -112,13 +112,13 @@ CREATE TABLE `crr_modules` (
   `nombre` varchar(80) DEFAULT NULL,
   `estado` int(2) DEFAULT NULL,
   `html` text,
-  `Key` text COMMENT 'nombre encode base 64 x 5',
+  `icon` text COMMENT 'nombre encode base 64 x 5',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 /*Data for the table `crr_modules` */
 
-insert  into `crr_modules`(`id`,`nombre`,`estado`,`html`,`Key`) values (1,'usuarios',1,'<a href=\"#\" onclick=\"acceso(\'modulos/usuarios.php?id=1\')\">Usuarios</a>','VjJ0YWIxUXdNVmRpUm14VVltdEtjRlJVUVhkUFVUMDk='),(2,'proveedores',1,'<a href=\"#\" onclick=\"acceso(\'modulos/proveedores.php?id=2\')\">Proveedores</a>',NULL),(3,'clientes',1,'<a href=\"modulos/clientes.php\">Clientes</a>',NULL),(4,'UsuariosEdit',1,NULL,NULL);
+insert  into `crr_modules`(`id`,`nombre`,`estado`,`html`,`icon`) values (1,'usuarios',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-people\"'),(2,'proveedores',1,'class=\"small-box bg-yellow\"','class=\"ion ion-ios-person\"'),(3,'clientes',1,'class=\"small-box bg-green\"','class=\"ion ion-ios-person\"'),(4,'UsuariosEdit',1,'class=\"small-box bg-red\"','class=\"ion ion-ios-person\"'),(5,'Configuraciones',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-person\"'),(6,NULL,NULL,NULL,'class=\"ion ion-ios-person\"');
 
 /*Table structure for table `crr_permissions` */
 
@@ -129,11 +129,11 @@ CREATE TABLE `crr_permissions` (
   `id_modulo` int(10) DEFAULT NULL,
   `id_user` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 /*Data for the table `crr_permissions` */
 
-insert  into `crr_permissions`(`id`,`id_modulo`,`id_user`) values (1,1,1),(2,1,3),(3,2,1),(4,3,1),(5,3,5);
+insert  into `crr_permissions`(`id`,`id_modulo`,`id_user`) values (1,1,1),(2,1,3),(3,2,1),(4,3,1),(5,3,5),(6,1,4),(7,2,4),(8,5,1),(9,4,1);
 
 /*Table structure for table `crr_procesos` */
 
@@ -169,10 +169,13 @@ DROP TABLE IF EXISTS `crr_temporada`;
 CREATE TABLE `crr_temporada` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` text,
+  `Activa` int(11) DEFAULT '0' COMMENT '1=activa 0=inactiva',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 /*Data for the table `crr_temporada` */
+
+insert  into `crr_temporada`(`id`,`descripcion`,`Activa`) values (1,'Primavera-verano 2015',0),(2,'Primavera-verano 2016',1);
 
 /*Table structure for table `crr_unidades` */
 
@@ -203,7 +206,7 @@ CREATE TABLE `crr_users` (
 
 /*Data for the table `crr_users` */
 
-insert  into `crr_users`(`id`,`usuario`,`pass`,`nivel`,`correo`,`Estado`) values (1,'ivan','9f3ae80a0097d4523e47761684d5e33f',0,'potara.cotosta@gmail.com',1),(3,'julio','9f3ae80a0097d4523e47761684d5e33f',1,'ivan.rodriguez1986@hotmail.com',1),(4,'fer','9f3ae80a0097d4523e47761684d5e33f',1,'potara_cotosta@hotmail.com',1),(5,'omar','9f3ae80a0097d4523e47761684d5e33f',2,'1@6',1),(6,'sergio','9f3ae80a0097d4523e47761684d5e33f',2,'2@6',1);
+insert  into `crr_users`(`id`,`usuario`,`pass`,`nivel`,`correo`,`Estado`) values (1,'ivan','9f3ae80a0097d4523e47761684d5e33f',0,'potara.cotosta@gmail.com',1),(3,'julio','9f3ae80a0097d4523e47761684d5e33f',1,'ivan.rodriguez1986@hotmail.com',1),(4,'ismael','9f3ae80a0097d4523e47761684d5e33f',1,'ing.ismael@hotmail.com',1),(5,'omar','9f3ae80a0097d4523e47761684d5e33f',2,'1@6',1),(6,'sergio','9f3ae80a0097d4523e47761684d5e33f',2,'2@6',1);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
