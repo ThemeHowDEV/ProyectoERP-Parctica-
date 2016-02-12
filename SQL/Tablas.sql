@@ -58,6 +58,21 @@ CREATE TABLE `crr_ejecution_fuctions` (
 
 insert  into `crr_ejecution_fuctions`(`id`,`id_fuction`,`id_user`) values (1,1,1),(2,2,1),(3,3,1),(4,4,1),(5,5,1);
 
+/*Table structure for table `crr_estados_modulos` */
+
+DROP TABLE IF EXISTS `crr_estados_modulos`;
+
+CREATE TABLE `crr_estados_modulos` (
+  `id_estado` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_estado`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_estados_modulos` */
+
+insert  into `crr_estados_modulos`(`id_estado`,`nombre`,`descripcion`) values (1,'Activo','En este estado el modulo se encuentra activo y funcional'),(2,'Inactivo','En este estado el modulo esta inactivo pero funcional'),(3,'Construccion','En este estado el Modulo esta en construccion');
+
 /*Table structure for table `crr_functions` */
 
 DROP TABLE IF EXISTS `crr_functions`;
@@ -110,7 +125,7 @@ DROP TABLE IF EXISTS `crr_modules`;
 CREATE TABLE `crr_modules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(80) DEFAULT NULL,
-  `estado` int(2) DEFAULT NULL,
+  `estado_id` int(2) DEFAULT NULL,
   `html` text,
   `icon` text COMMENT 'nombre encode base 64 x 5',
   PRIMARY KEY (`id`)
@@ -118,7 +133,7 @@ CREATE TABLE `crr_modules` (
 
 /*Data for the table `crr_modules` */
 
-insert  into `crr_modules`(`id`,`nombre`,`estado`,`html`,`icon`) values (1,'usuarios',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-people\"'),(2,'proveedores',1,'class=\"small-box bg-yellow\"','class=\"ion ion-ios-person\"'),(3,'clientes',1,'class=\"small-box bg-green\"','class=\"ion ion-ios-person\"'),(4,'UsuariosEdit',1,'class=\"small-box bg-red\"','class=\"ion ion-ios-person\"'),(5,'Configuraciones',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-person\"'),(6,NULL,NULL,NULL,'class=\"ion ion-ios-person\"');
+insert  into `crr_modules`(`id`,`nombre`,`estado_id`,`html`,`icon`) values (1,'usuarios',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-people\"'),(2,'proveedores',1,'class=\"small-box bg-yellow\"','class=\"ion ion-ios-person\"'),(3,'clientes',1,'class=\"small-box bg-green\"','class=\"ion ion-ios-person\"'),(4,'UsuariosEdit',1,'class=\"small-box bg-gray\"','class=\"ion ion-ios-person\"'),(5,'Configuracion',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-person\"');
 
 /*Table structure for table `crr_permissions` */
 

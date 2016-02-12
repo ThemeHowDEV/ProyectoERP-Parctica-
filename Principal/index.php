@@ -364,13 +364,13 @@
             $mysqli->real_query ('SELECT m.id,
              m.nombre modulo,
              m.html enlace,
-             m.estado,
+             m.estado_id,
              p.id_user permiso,
              m.icon
           FROM crr_modules m, 
                crr_permissions p
            WHERE p.id_user='.$_SESSION["id"].'
-           AND m.estado=1
+           AND m.estado_id=1
            AND p.id_modulo=m.id');
     
       //$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
@@ -380,11 +380,11 @@
           while ($fila = $resultado->fetch_assoc())
            {
             ?>
-                         <div class="col-lg-3 col-xs-1">
+                         <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div <?php echo $fila['enlace']; ?> >
                 <div class="inner">
-                  <h3 style="font-color:white;"><?php echo utf8_decode($fila['modulo']); ?></h3>
+                  <h3 ><?php echo ucwords(utf8_decode($fila['modulo'])); ?></h3>
                   <p>New Orders</p>
                 </div>
                 <div class="icon">
