@@ -324,20 +324,51 @@
               </span>
             </div>
           </form>
+          <?php 
+           $mysqli->real_query ('SELECT m.id,
+             m.nombre modulo,
+             m.html Clase,
+             m.estado_id,
+             p.id_user permiso,
+             m.icon,
+             em.nombre estado_modulo,
+             m.icon_baner
+          FROM crr_modules m, 
+               crr_permissions p,
+    crr_estados_modulos em
+           WHERE p.id_user='.$_SESSION["id"].'
+           AND em.id_estado=estado_id
+           AND m.estado_id=1
+           AND p.id_modulo=m.id');
+    
+      //$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
+           $resultado = $mysqli->use_result();
+          ?>
           <!-- /.search form -->
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="header">Menu Principal</li>
+<?php 
+
+          while ($fila = $resultado->fetch_assoc())
+           {
+            ?>
+                        <li >
+                          <!--<li class="active treeview"> Para abrir por delault-->
               <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Navegacion</span> <i class="fa fa-angle-left pull-right"></i>
+                <i <?php echo $fila['icon_baner']?> ></i> <span><?php
+
+                echo ucwords(utf8_decode($fila['modulo']));
+                ?></span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Submenu </a></li>
               </ul>
             </li>
-            
-            
+            <?php
+           }
+
+?>
         </section>
         <!-- /.sidebar -->
       </aside>
@@ -363,14 +394,16 @@
             <?php
             $mysqli->real_query ('SELECT m.id,
              m.nombre modulo,
-             m.html enlace,
+             m.html Clase,
              m.estado_id,
              p.id_user permiso,
-             m.icon
+             m.icon,
+             em.nombre estado_modulo
           FROM crr_modules m, 
-               crr_permissions p
+               crr_permissions p,
+    crr_estados_modulos em
            WHERE p.id_user='.$_SESSION["id"].'
-           AND m.estado_id=1
+           AND em.id_estado=estado_id
            AND p.id_modulo=m.id');
     
       //$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
@@ -382,7 +415,22 @@
             ?>
                          <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div <?php echo $fila['enlace']; ?> >
+              <div title ="<?php 
+              if($fila['estado_id']!=1)
+              {
+                echo "El estado del modulo es ".utf8_decode($fila['estado_modulo']);
+              }
+              else{
+              echo ucwords(utf8_decode($fila['modulo'])); } ?>"<?php
+               if($fila['estado_id']!=1)
+              {
+                echo 'class="small-box bg-gray"';
+              }
+              else
+              {
+               echo $fila['Clase'];
+               } 
+             ?> >
                 <div class="inner">
                   <h3 ><?php echo ucwords(utf8_decode($fila['modulo'])); ?></h3>
                   <p>New Orders</p>

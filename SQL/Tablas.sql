@@ -127,13 +127,14 @@ CREATE TABLE `crr_modules` (
   `nombre` varchar(80) DEFAULT NULL,
   `estado_id` int(2) DEFAULT NULL,
   `html` text,
-  `icon` text COMMENT 'nombre encode base 64 x 5',
+  `icon` text,
+  `icon_baner` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `crr_modules` */
 
-insert  into `crr_modules`(`id`,`nombre`,`estado_id`,`html`,`icon`) values (1,'usuarios',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-people\"'),(2,'proveedores',1,'class=\"small-box bg-yellow\"','class=\"ion ion-ios-person\"'),(3,'clientes',1,'class=\"small-box bg-green\"','class=\"ion ion-ios-person\"'),(4,'UsuariosEdit',1,'class=\"small-box bg-gray\"','class=\"ion ion-ios-person\"'),(5,'Configuracion',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-person\"');
+insert  into `crr_modules`(`id`,`nombre`,`estado_id`,`html`,`icon`,`icon_baner`) values (1,'usuarios',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-people\"','class=\"fa fa-users\"'),(2,'proveedores',1,'class=\"small-box bg-yellow\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"'),(3,'clientes',1,'class=\"small-box bg-green\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"'),(4,'UsuariosEdit',2,'class=\"small-box bg-gray\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"'),(5,'Configuracion',3,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"');
 
 /*Table structure for table `crr_permissions` */
 
