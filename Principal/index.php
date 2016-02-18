@@ -324,8 +324,10 @@
               </span>
             </div>
           </form>
+            <ul class="sidebar-menu">
+            <li class="header">Menu Principal</li>
           <?php 
-           $mysqli->real_query ('SELECT m.id,
+          $query   = "SELECT m.id,
              m.nombre modulo,
              m.html Clase,
              m.estado_id,
@@ -336,40 +338,49 @@
           FROM crr_modules m, 
                crr_permissions p,
     crr_estados_modulos em
-           WHERE p.id_user='.$_SESSION["id"].'
+           WHERE p.id_user=".$_SESSION["id"]."
            AND em.id_estado=estado_id
            AND m.estado_id=1
-           AND p.id_modulo=m.id');
-    
-      //$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
-           $resultado = $mysqli->use_result();
-          ?>
-          <!-- /.search form -->
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
-            <li class="header">Menu Principal</li>
-<?php 
-
-          while ($fila = $resultado->fetch_assoc())
-           {
-            ?>
+           AND p.id_modulo=m.id";
+if ($mysqli->multi_query($query)) {
+    do {
+        /* almacenar primer juego de resultados */
+        if ($result = $mysqli->store_result()) {
+            while ($row = $result->fetch_object()) {
+               ?>
                         <li >
                           <!--<li class="active treeview"> Para abrir por delault-->
               <a href="#">
-                <i <?php echo $fila['icon_baner']?> ></i> <span><?php
+                <i <?php echo $row->icon_baner; ?> ></i> <span><?php
 
-                echo ucwords(utf8_decode($fila['modulo']));
+                echo ucwords(utf8_decode($row->modulo));
                 ?></span> <i class="fa fa-angle-left pull-right"></i>
               </a>
-              <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i>Submenu </a></li>
-              </ul>
-            </li>
-            <?php
-           }
+               <?php 
+                $id=$row->id;
 
-?>
-        </section>
+                 $query2   = "SELECT * FROM crr_submodulos s WHERE s.id_modulo=$id;";
+
+          $mysqli->multi_query($query2);
+                  if ($result2 = $mysqli->store_result()) {
+            while ($row2 = $result2->fetch_object()) {
+                //echo $row2->nombre;
+              ?>
+               <ul class="treeview-menu">
+                <li class="active"><a href="#"><i class="fa fa-circle-o"></i><?php echo ucwords(utf8_decode($row2->nombre)); ?> </a></li>
+              </ul>
+              <?php
+            }
+            $result2->free();
+        }
+            }
+            $result->free();
+        }
+    } while ($mysqli->next_result());
+}
+else{ echo "error <br>".$query."<br> ERROR TIPO ".mysqli_error($mysqli); }
+           ?>
+       </section>
         <!-- /.sidebar -->
       </aside>
 
@@ -392,6 +403,7 @@
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <?php
+
             $mysqli->real_query ('SELECT m.id,
              m.nombre modulo,
              m.html Clase,
@@ -404,6 +416,7 @@
     crr_estados_modulos em
            WHERE p.id_user='.$_SESSION["id"].'
            AND em.id_estado=estado_id
+           AND m.baner=1
            AND p.id_modulo=m.id');
     
       //$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);

@@ -129,12 +129,13 @@ CREATE TABLE `crr_modules` (
   `html` text,
   `icon` text,
   `icon_baner` text,
+  `baner` int(11) DEFAULT NULL COMMENT '1= Aparece en baner y barra lateral, 0 solo en barra lateral',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `crr_modules` */
 
-insert  into `crr_modules`(`id`,`nombre`,`estado_id`,`html`,`icon`,`icon_baner`) values (1,'usuarios',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-people\"','class=\"fa fa-users\"'),(2,'proveedores',1,'class=\"small-box bg-yellow\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"'),(3,'clientes',1,'class=\"small-box bg-green\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"'),(4,'UsuariosEdit',2,'class=\"small-box bg-gray\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"'),(5,'Configuracion',3,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"');
+insert  into `crr_modules`(`id`,`nombre`,`estado_id`,`html`,`icon`,`icon_baner`,`baner`) values (1,'usuarios',1,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-people\"','class=\"fa fa-users\"',1),(2,'proveedores',1,'class=\"small-box bg-yellow\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"',1),(3,'clientes',1,'class=\"small-box bg-green\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"',0),(4,'UsuariosEdit',2,'class=\"small-box bg-gray\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"',1),(5,'Configuracion',3,'class=\"small-box bg-aqua\"','class=\"ion ion-ios-person\"','class=\"fa fa-user\"',1);
 
 /*Table structure for table `crr_permissions` */
 
@@ -177,6 +178,25 @@ CREATE TABLE `crr_rols` (
 /*Data for the table `crr_rols` */
 
 insert  into `crr_rols`(`id`,`descripcion`) values (0,'Super Administrador'),(1,'Administrador'),(2,'Usuario'),(3,'Colaborador'),(4,'Empleado'),(6,'Proveedor');
+
+/*Table structure for table `crr_submodulos` */
+
+DROP TABLE IF EXISTS `crr_submodulos`;
+
+CREATE TABLE `crr_submodulos` (
+  `id_submodulo` int(11) NOT NULL AUTO_INCREMENT,
+  `id_modulo` int(11) DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `estado_id` int(11) DEFAULT NULL,
+  `color_class` varchar(80) DEFAULT NULL,
+  `icon` varchar(80) DEFAULT NULL,
+  `icon_baner` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`id_submodulo`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+/*Data for the table `crr_submodulos` */
+
+insert  into `crr_submodulos`(`id_submodulo`,`id_modulo`,`nombre`,`estado_id`,`color_class`,`icon`,`icon_baner`) values (1,1,'Tabla Usuarios',1,NULL,NULL,NULL),(2,1,'Nuevo usuario',1,NULL,NULL,NULL),(3,1,'Editar usuario',1,NULL,NULL,NULL),(4,2,'Tabla Proveedores',1,NULL,NULL,NULL),(5,2,'Nuevo Proveedor',1,NULL,NULL,NULL);
 
 /*Table structure for table `crr_temporada` */
 
