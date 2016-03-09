@@ -8,6 +8,12 @@
           //date_default_timezone_set('UTC');
      
       ?>    
+      <!--IMPORTAMOS JAVASCRIPT-->
+    <script languaje="JavaScript" type="text/javascript">
+    function Modules(id){var idT =id;
+      $("#AreaTrabajo").load('../modulos/modulos.php', { id: idT})}
+      </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html>
   <head>
@@ -39,6 +45,9 @@
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -272,7 +281,7 @@
                   </li>
                   <!-- Menu Body -->
                   <li class="user-body">
-                    <div class="col-xs-4 text-center">
+                    <div  class="col-xs-4 text-center">
                       <a style='cursor: url(../img/icons/edit.png), auto !important; text-align: center;' 
         href="../Functions/ConfigUser.php?opc=4" 
         title="Cambiar Imagen de <?php echo $_SESSION["usuario"]; ?>">Cambiar Imagen</a>
@@ -307,7 +316,7 @@
         <section class="sidebar">
           <!-- Sidebar user panel -->
           <div class="user-panel">
-            <div class="pull-left image">
+            <div  class="pull-left image">
               <img src="../img/users/<?php echo $_SESSION["id"]; ?>.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
@@ -323,9 +332,28 @@
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
             </div>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+ 
+function refresh(id)
+{
+  var ids=id;
+  //document.getElementById("Disp_"+ids).className = "";
+//si esta activo
+if ( document.getElementById"Disp_"+ids).className.match(/(?:^|\s)active(?!\S)/) )
+{
+  document.getElementById("Disp_"+ids).style.display="block";
+  //alert("Si");
+}
+  //document.getElementById(ids+"_baner").className("active");
+}
+
+</script>
+
           </form>
-            <ul class="sidebar-menu">
-            <li class="header">Menu Principal</li>
+            <ul  class="sidebar-menu">
+            <li  class="header">Menu Principal</li>
           <?php 
           $query   = "SELECT m.id,
              m.nombre modulo,
@@ -348,13 +376,13 @@ if ($mysqli->multi_query($query)) {
         if ($result = $mysqli->store_result()) {
             while ($row = $result->fetch_object()) {
                ?>
-                        <li >
+                        <li id="<?php echo $row->id;?>_baner">
                           <!--<li class="active treeview"> Para abrir por delault-->
               <a href="#">
                 <i <?php echo $row->icon_baner; ?> ></i> <span><?php
 
                 echo ucwords(utf8_decode($row->modulo));
-                ?></span> <i class="fa fa-angle-left pull-right"></i>
+                ?></span > <i onclick="refresh(<?php echo $row->id;?>)" class="fa fa-angle-left pull-right"></i>
               </a>
                <?php 
                 $id=$row->id;
@@ -366,8 +394,8 @@ if ($mysqli->multi_query($query)) {
             while ($row2 = $result2->fetch_object()) {
                 //echo $row2->nombre;
               ?>
-               <ul class="treeview-menu">
-                <li class="active"><a href="#"><i class="fa fa-circle-o"></i><?php echo ucwords(utf8_decode($row2->nombre)); ?> </a></li>
+               <ul id="<?php echo 'Disp_'.$row->id;?>" class="treeview-menu <?php echo 'claseId'.$id; ?>">  
+                <li id="<?php echo 'Sub_'.$row->id;?>" class="active"><a href="#"><i class="fa fa-circle-o"></i><?php echo ucwords(utf8_decode($row2->nombre)); ?> </a></li>
               </ul>
               <?php
             }
@@ -451,7 +479,7 @@ else{ echo "error <br>".$query."<br> ERROR TIPO ".mysqli_error($mysqli); }
                 <div class="icon">
                   <i <?php echo utf8_decode($fila['icon']); ?>></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" onclick='Modules("<?php echo $fila['id']; ?>")' class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
         <?php
@@ -462,6 +490,9 @@ else{ echo "error <br>".$query."<br> ERROR TIPO ".mysqli_error($mysqli); }
         ?>  
             
           </div><!-- /.row -->
+          <div id="AreaTrabajo">
+            hola
+          </div>
           <!-- Main row -->
          
         </section><!-- /.content -->
