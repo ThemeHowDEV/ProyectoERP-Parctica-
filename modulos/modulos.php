@@ -1,6 +1,6 @@
 <?php 
 include '../conexion.php';
-include 'usuarios.php';
+include 'submodulos.php';
 $mysqli=conectar(1);
    
    if(isset($_POST['id'])){
@@ -14,41 +14,48 @@ $file = $modulos->fetch_assoc();
 $modulos->free_result();
 
    $ModuleName =$file['nombre'];
+   $idModulo=$file['id'];
+   $Estado=$file['estado_id'];
 
-   switch ($ModuleName) {
-   	case 'usuarios':
-   		tbl_usrer($mysqli);//Invoca la funcion de cargar tabla usuarios
+   switch ($Estado) {
+   	case '1':
+   		tbl_Submodulos($mysqli,$idModulo);//Invoca la funcion de cargar tabla usuarios
    		break;
-   	case 'proveedores':
-   		echo "Modulo de proveedores";
+   	case '3':
+   		echo "<h1>El modulo al que intenta ingresar esta fuera en construccion</h1>";
+         ?> <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion Ion-ios-home"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Regresar</span>
+                  <!-- <span class="info-box-number">90<small>%</small></span>-->
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col --><?php
    		break;
-         case 'UsuariosEdit':
-           tbl_usrerEdit();
-            break;
-            case 'Configuraciones':
-               ?>
-                  <!--IMPORTAMOS JAVASCRIPT-->
-                  <script languaje="JavaScript" type="text/javascript">
-                  function Temps()
-                  {
-                  $("#ContenidosConf").load('modulos/config/temporadas.php');
-                  }
-                  </script>
-
-               <div align="center">
-                  <h1>Configuraciones Generales</h1>
-               <!--<img src="img/icons/Config.png">
-               </div>-->
-               <div align="center">
-                  <a onclick='Temps()' title="Temporadas" href="#"><img width="5%" height="5%" src="img/icons/temp.png"></a>
-               </div>
-               <br>
-               <div align="center" id="ContenidosConf">
-               </div>
-               <?php
+            case '2':
+               echo "<h1>El modulo al que intenta ingresar no ha sido adquirido</h1>";
+               ?> <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion Ion-ios-home"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Regresar</span>
+                  <!-- <span class="info-box-number">90<small>%</small></span>-->
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col --><?php
                break;
    	default:
    		echo "<h1>El modulo al que intenta ingresar esta fuera de servicio</h1>";
+         ?> <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion Ion-ios-home"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Regresar</span>
+                  <!-- <span class="info-box-number">90<small>%</small></span>-->
+                </div><!-- /.info-box-content -->
+              </div><!-- /.info-box -->
+            </div><!-- /.col --><?php
    		break;
    }}
    else{

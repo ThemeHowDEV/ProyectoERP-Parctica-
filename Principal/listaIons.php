@@ -10,18 +10,8 @@
       ?>    
       <!--IMPORTAMOS JAVASCRIPT-->
     <script languaje="JavaScript" type="text/javascript">
-    function Modules(id){
-      var idT =id;
-      $('#AreaTrabajo').css('display','block');//Cambiar valor CSS mostrar
-      $("#AreaTrabajo").load('../modulos/modulos.php', { id: idT})
-      $('#ModulosBox').css('display','none');//Cambiar valor CSS ocultar
-    }
-    function House()
-    {
-
-     $('#ModulosBox').css('display','block');//Cambiar valor CSS mostrar 
-     $('#AreaTrabajo').css('display','none');//Cambiar valor CSS ocultar
-    }
+    function Modules(id){var idT =id;
+      $("#AreaTrabajo").load('../modulos/modulos.php', { id: idT})}
       </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <!DOCTYPE html>
@@ -439,23 +429,10 @@ else{ echo "error <br>".$query."<br> ERROR TIPO ".mysqli_error($mysqli); }
         <!-- Main content -->
         <section class="content">
           <!-- Small boxes (Stat box) -->
-          <div id="ModulosBox" class="row">
+          <div class="row">
             <?php
 
-            $mysqli->real_query ('SELECT m.id,
-             m.nombre modulo,
-             m.html Clase,
-             m.estado_id,
-             p.id_user permiso,
-             m.icon,
-             em.nombre estado_modulo
-          FROM crr_modules m, 
-               crr_permissions p,
-    crr_estados_modulos em
-           WHERE p.id_user='.$_SESSION["id"].'
-           AND em.id_estado=estado_id
-           AND m.baner=1
-           AND p.id_modulo=m.id');
+            $mysqli->real_query ('SELECT * FROM icons order by icon DESC');
     
       //$consul=mysql_query($sql) or die (mysql_error()."<br/>".$sql);
            $resultado = $mysqli->use_result();
@@ -466,30 +443,18 @@ else{ echo "error <br>".$query."<br> ERROR TIPO ".mysqli_error($mysqli); }
             ?>
                          <div class="col-lg-3 col-xs-6">
               <!-- small box -->
-              <div title ="<?php 
-              if($fila['estado_id']!=1)
-              {
-                echo "El estado del modulo es ".utf8_decode($fila['estado_modulo']);
-              }
-              else{
-              echo ucwords(utf8_decode($fila['modulo'])); } ?>"<?php
-               if($fila['estado_id']!=1)
-              {
-                echo 'class="small-box bg-gray"';
-              }
-              else
-              {
-               echo 'class="small-box '.$fila['Clase'].'"';
-               } 
-             ?> >
+              <div title ="X" <?php 
+               echo 'class="small-box bg-aqua"';
+               ?>
+             ?> 
                 <div class="inner">
-                  <h3 ><?php echo ucwords(utf8_decode($fila['modulo'])); ?></h3>
-                  <p>New Orders</p>
+                  <h5 ><?php echo ucwords(utf8_decode($fila['icon'])); ?></h5>
+                  
                 </div>
                 <div class="icon">
-                  <i <?php echo utf8_decode($fila['icon']); ?>></i>
+                  <i <?php echo 'class="ion '.utf8_decode($fila['icon']).'"'; ?>></i>
                 </div>
-                <a href="#" onclick='Modules("<?php echo $fila['id']; ?>")' class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                
               </div>
             </div><!-- ./col -->
         <?php
