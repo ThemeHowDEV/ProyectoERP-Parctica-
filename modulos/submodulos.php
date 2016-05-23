@@ -24,15 +24,18 @@ while ($fila = $ConsUsuario->fetch_object())
           </div>';
            }
            ?>
-                       <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
+           <div class="col-md-3 col-sm-6 col-xs-12">
+            <button onclick="House();" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-sign-out"></i>Regresar</button>
+          </div>
+                  <!--     <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion Ion-ios-home"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Regresar</span>
-                  <!-- <span class="info-box-number">90<small>%</small></span>-->
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col -->
+                  
+                </div>
+              </div>
+            </div>-->
             <?php
            
 

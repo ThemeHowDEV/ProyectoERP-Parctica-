@@ -43,39 +43,45 @@ $modulos->free_result();
    		break;
    	case '3':
    		echo "<h1>El modulo al que intenta ingresar esta en construccion</h1>";
-         ?> <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
+         ?>  <button onclick="House();" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-sign-out"></i>Regresar</button> 
+         <!--<div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion Ion-ios-home"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Regresar</span>
-                  <!-- <span class="info-box-number">90<small>%</small></span>-->
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col --><?php
+                  
+                </div>
+              </div>
+            </div>-->
+            <?php
    		break;
             case '2':
                echo "<h1>El modulo al que intenta ingresar no ha sido adquirido</h1>";
-               ?> <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
+               ?>  <button onclick="House();" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-sign-out"></i>Regresar</button> 
+               <!--<div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion Ion-ios-home"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Regresar</span>
-                  <!-- <span class="info-box-number">90<small>%</small></span>-->
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col --><?php
+                  
+                </div>
+              </div>
+            </div>-->
+            <?php
                break;
    	default:
    		echo "<h1>El modulo al que intenta ingresar esta fuera de servicio</h1>";
-         ?> <div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
+         ?>  <button onclick="House();" class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-sign-out"></i>Regresar</button> 
+         <!--<div class="col-md-3 col-sm-6 col-xs-12" onclick="House();">
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion Ion-ios-home"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Regresar</span>
-                  <!-- <span class="info-box-number">90<small>%</small></span>-->
-                </div><!-- /.info-box-content -->
-              </div><!-- /.info-box -->
-            </div><!-- /.col --><?php
+                  
+                </div>
+              </div>
+            </div>-->
+            <?php
    		break;
    }}
    else{

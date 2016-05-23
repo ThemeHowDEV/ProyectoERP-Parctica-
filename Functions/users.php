@@ -25,7 +25,7 @@ switch ($opc) {
 			}
 			break;
 	default:
-		# code...
+		
 		break;
 }
 
